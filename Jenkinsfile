@@ -1,20 +1,23 @@
 pipeline {
-    agent any
+    agent any  // Use any available agent
 
     stages {
-        stage('Build Image') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    // Correct way to build a Docker image
-                    sh 'docker build -t myimage .'
+                    // Build the Docker image from the Dockerfile in the current directory
+                    bat "docker build -t shubham7211/dock ."
                 }
             }
         }
-        stage('Run Container') {
+        stage('Build and Run Docker Container') {
             steps {
                 script {
-                    // Correct way to run a Docker container in daemon mode
-                    sh 'docker run -d --name mycontainer myimage'
+                    // Remove any existing container with the same name to avoid conflicts
+                    bat "docker rm -f my-app-container || exit 0"
+
+                    // Run the Docker container in detached mode
+                    bat "docker run -d --name my-app-container shubham7211/dock"
                 }
             }
         }
