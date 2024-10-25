@@ -1,23 +1,27 @@
 pipeline {
-    agent any  // Use any available agent
-
+    agent any
     stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/vinayyyyyyyy/2330_ISA2.git'
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image from the Dockerfile in the current directory
-                    bat "docker build -t vinayyy/dockerdemo ."
+                    bat 'docker build -t vinayyy/2330_ISA2 .'
                 }
             }
         }
-        stage('Build and Run Docker Container') {
+        stage('Run Container') {
             steps {
                 script {
-                    // Remove any existing container with the same name to avoid conflicts
-                    bat "docker rm -f my-app-container || exit 0"
-
-                    // Run the Docker container in detached mode
-                    bat "docker run -d --name my-app-container vinayyy/dockerdemo"
+                    try {
+                        bat 'docker rm -f 2330'
+                    } catch (Exception e) {
+                        echo "No existing container to remove"
+                    }
+                    bat 'docker run -d --name 2330-container vinayyy/2330_ISA2'
                 }
             }
         }
