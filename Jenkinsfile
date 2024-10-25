@@ -1,28 +1,25 @@
 pipeline {
-    agent any  
+    agent any  // Use any available agent
 
     stages {
         stage('Build Docker Image') {
             steps {
                 script {
-                    
-                    bat "docker build -t vinayyy/2330 ."
+                    // Build the Docker image from the Dockerfile in the current directory
+                    bat "docker build -t vinayyy/dockerdemo ."
                 }
             }
         }
         stage('Build and Run Docker Container') {
             steps {
                 script {
-                    
+                    // Remove any existing container with the same name to avoid conflicts
                     bat "docker rm -f my-app-container || exit 0"
 
-                    
-                    bat "docker run -d --name my-app-container vinayyy/2330"
+                    // Run the Docker container in detached mode
+                    bat "docker run -d --name my-app-container vinayyy/dockerdemo"
                 }
             }
         }
     }
 }
-add:
-clone the github repository.
-delete a container named <roll_no>
