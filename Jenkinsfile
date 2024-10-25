@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image from the Dockerfile in the current directory
-                    bat "docker build -t shubham7211/dock ."
+                    bat "docker build -t vinayyyyyyyy/Docker1 ."
                 }
             }
         }
@@ -17,7 +17,7 @@ pipeline {
                     bat "docker rm -f my-app-container || exit 0"
 
                     // Run the Docker container in detached mode
-                    bat "docker run -d --name my-app-container shubham7211/dock"
+                    bat "docker run -d --name my-app-container vinayyyyyyyy/Docker1"
                 }
             }
         }
