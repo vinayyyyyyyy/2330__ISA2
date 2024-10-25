@@ -2,14 +2,6 @@ pipeline {
     agent any  // Use any available agent
 
     stages {
-        stage('Clone GitHub Repository') {
-            steps {
-                script {
-                    // Clone the GitHub repository to the current workspace
-                    bat "git clone https://github.com/vinayyyyyyyy/2330__ISA2.git ."
-                }
-            }
-        }
         stage('Build Docker Image') {
             steps {
                 script {
